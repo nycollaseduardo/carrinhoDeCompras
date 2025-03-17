@@ -1,32 +1,23 @@
 let valorTotal = document.getElementById('valor-total');
-let quantidade = document.getElementById('quantidade');
 let listaProdutos = document.getElementById('lista-produtos');
 let somatorio = 0;
 
 function adicionar() {
-    let produto = document.getElementById('produto');
-    let total = 0;
-    let molde = '';
-    if (produto.value == 'Fone de ouvido - R$100') {
-        total = 100 * quantidade.value;
-        molde = `${quantidade.value}x ${produto.value}<br>`;
-    }
-    else if (produto.value == 'Celular - R$1400') {
-        total = 1400 * quantidade.value;
-        molde = `${quantidade.value}x ${produto.value}<br>`;
-    }
-    else if (produto.value == 'Oculus VR - R$5000') {
-        total = 5000 * quantidade.value;
-        molde = `${quantidade.value}x ${produto.value}<br>`;
-    }
-    listaProdutos.innerHTML += molde;
+    let quantidade = document.getElementById('quantidade').value;
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorProduto = produto.split('R$')[1];
+    let total = quantidade * valorProduto;
+    let carrinho = `<section class="carrinho__produtos__produto">
+    <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R$${total}</span></section>`
+    listaProdutos.innerHTML += carrinho;
     somatorio += total
     valorTotal.innerHTML = `R$${somatorio}`;
 }
 
 function limpar() {
     valorTotal.innerHTML = 'R$0'
-    quantidade.value = 0;
+    document.getElementById('quantidade').value = '';
     listaProdutos.innerHTML = '';
     somatorio = 0;
 }
